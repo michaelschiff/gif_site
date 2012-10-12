@@ -1,3 +1,4 @@
+from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
@@ -20,8 +21,6 @@ def registration(request):
     return render_to_response('login_app/registration.html', c)
 
 def login_handler(request):
-    c = {}
-    c.update(csrf(request))
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
@@ -30,9 +29,9 @@ def login_handler(request):
             login(request, user)
             return HttpResponseRedirect(reverse('gif_app.views.index'))
         else:
-            return HttpResponseRedirect(reverse('login_app.views.login_page'))
+            return render_to_response('login_app/login_page.html', {msg: "Username and/or Password did not validate."}, context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(reverse('login_app.views.login_page'))
+        return render_to_response('login_app/login_page.html', {'msg': "Username and/or Password did not validate."}, context_instance=RequestContext(request))
 
 def logout_handler(request):
     logout(request)
