@@ -6,6 +6,9 @@
     #main {
         text-align: center;
     }
+    #alert { 
+        color: red;
+    }
 </style>
 </br>
 <div id="main" class="span12">
@@ -14,4 +17,7 @@
         <input type="password" name="password" value="password"/></br>
         <input type="submit" value="Register"/>
     </form>
+    {% if msg %}
+    <b id="alert">{{ msg }}</b>
+    {% endif %}
 </div>

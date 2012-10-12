@@ -38,8 +38,11 @@ def logout_handler(request):
     return HttpResponseRedirect(reverse('login_app.views.index'))
 
 def newuser_handler(request):
-    user = User.objects.create_user(username=request.POST['username'],
-                                    email="",
-                                    password=request.POST['password'])
-    user.save()
-    return HttpResponseRedirect(reverse('login_app.views.index'))
+    try:
+        user = User.objects.create_user(username=request.POST['username'],
+                                        email="",
+                                        password=request.POST['password'])
+        user.save()
+        return HttpResponseRedirect(reverse('login_app.views.index'))
+    except:
+        return render_to_response('login_app/registration.html', {'msg': "That Username is already taken. Pick a different one."}, context_instance=RequestContext(request))
