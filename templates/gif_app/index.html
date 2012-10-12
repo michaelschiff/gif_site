@@ -1,4 +1,11 @@
 <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"></link>
+<script src="http://www.google.com/jsapi?key=ABQIAAAADYbHHQrNWPElNtE4hn2g1hQhn5tTlmnhbGVHENfXgw8ik0kvARSWpfuAdtdt1KqinQpUokxB7SpcsQ" type="text/javascript"></script>
+<script type="text/javascript">
+        google.load("jquery", "1");
+        google.load("jqueryui", "1");
+</script>
+<script type="text/javascript" src="/static/gif_app/drag_n_drop.js"></script>
+<link rel="stylesheet" href="/static/gif_app/drag_n_drop.css"></link>
 <style type="text/css">
     body {
         background-color: #EEDC82;
@@ -29,15 +36,18 @@
 <div id="center" class="span12">
     <form action="/gifs/newgif/" method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form.title }}</br>
-        {{ form.file_path}}</br>
+        <div id="dropbox"><span id="droplabel">Drop Gif Here</span></div>
+        <p id="file_name"></p>
+        {{ form.file_path }}
         <input type="submit" value="Submit">
     </form>
+    <br/>
     {% if gif_list %}
         {% for gif in gif_list %}
             <h3>{{gif.title}}</h3>
             <p><b>Posted By:</b>&nbsp{{ gif.user }}</p>
             <img src="/media/gifs/{{ gif.id }}/"/>
-            <br/><br/><br/>
+            <br/><br/><br/><br/>
         {% endfor %}
     {% else %}
         <p>No Gifs yet.</p>
