@@ -22,15 +22,16 @@
             <p><b>Hello, </b><b id="username">{{ user }}</b></p>
         </div>
         <div class="span6" id="right">
-            <a href="/logout/">logout</a>
+            <a href="/logout/"><b>logout</b></a>
         </div>
     </div>
-</div>
-<form action="/gifs/newgif/" method="post" enctype="multipart/form-data">{% csrf_token %}
-    {{ form.title }}{{ form.file_path}}
-    <input type="submit" value="Submit">
-</form>
+</div>    
 <div id="center" class="span12">
+    <form action="/gifs/newgif/" method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.title }}</br>
+        {{ form.file_path}}</br>
+        <input type="submit" value="Submit">
+    </form>
     {% if gif_list %}
         {% for gif in gif_list %}
             <h3>{{gif.title}}</h3>
