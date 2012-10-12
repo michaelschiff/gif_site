@@ -6,12 +6,7 @@ from django.conf import settings
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', 'login_app.views.index'),
-    (r'^login_page/$', 'login_app.views.login_page'),
-    (r'^login/$', 'login_app.views.login_handler'),
-    (r'^logout/$', 'login_app.views.logout_handler'),
-    (r'^registration/$', 'login_app.views.registration'),
-    (r'^newuser/$', 'login_app.views.newuser_handler'),
+    (r'^', include('login_app.urls')),
     (r'^gifs/', include('gif_app.urls')),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes':True}),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
