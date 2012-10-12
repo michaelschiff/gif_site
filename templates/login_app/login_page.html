@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css"></link>
+<style type="text/css">
+    body {
+        background-color: #EEDC82;
+    }
+    #main {
+        text-align: center;
+    }
+</style>
+</br>
+<div id="main" class="span12">
+    <form action="/login/" method="post">{% csrf_token %}
+        <input type="text" name="username" value="username"/></br>
+        <input type="password" name="password" value="password"/></br>
+        <input type="submit" value="Login"/>
+    </form>
+</div>
