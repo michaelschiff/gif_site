@@ -21,17 +21,22 @@ def registration(request):
     return render_to_response('login_app/registration.html', c)
 
 def login_handler(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
+    alert = "Username and/or Password did not validate."
+    user = None
+    try:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+    except:
+        return render_to_response('login_app/login_page.html', {'msg': alert}, context_instance=RequestContext(request))
     if user is not None:
         if user.is_active:
             login(request, user)
             return HttpResponseRedirect(reverse('gif_app.views.index'))
         else:
-            return render_to_response('login_app/login_page.html', {msg: "Username and/or Password did not validate."}, context_instance=RequestContext(request))
+            return render_to_response('login_app/login_page.html', {'msg': alert}, context_instance=RequestContext(request))
     else:
-        return render_to_response('login_app/login_page.html', {'msg': "Username and/or Password did not validate."}, context_instance=RequestContext(request))
+        return render_to_response('login_app/login_page.html', {'msg': alert}, context_instance=RequestContext(request))
 
 def logout_handler(request):
     logout(request)
