@@ -6,9 +6,26 @@
     #center {
         text-align: center;
     }
+    #left {
+        text-align: left;
+    }
+    #right {
+        text-align: right;
+    }
+    #username {
+        color: green;
+    }
 </style>
-<p>Hello, {{ user }}</p>
-<a href="/logout/">logout</a>
+<div class="span12">
+    <div class="row">
+        <div class="span6" id="left">
+            <p><b>Hello, </b><b id="username">{{ user }}</b></p>
+        </div>
+        <div class="span6" id="right">
+            <a href="/logout/">logout</a>
+        </div>
+    </div>
+</div>
 <form action="/gifs/newgif/" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ form.title }}{{ form.file_path}}
     <input type="submit" value="Submit">
